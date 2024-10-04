@@ -1,0 +1,167 @@
+@import './variables.scss';
+
+.header{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px 0 gray;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: $backgroundColor;
+}
+
+.headerLogoContainer{
+    display: flex;
+    align-items: center;
+}
+
+.headerOpenNavbarIconContainer{
+    display: flex;
+    align-items: center;
+}
+
+.headerOpenNavbarIcon{
+    color: $violetBytear;
+}
+
+.headerBorderBottom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, $blueBytear 0%, $violetBytear 50%);
+}
+
+.headerNavbar{
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+
+    width: 60%;
+    height: 100vh;
+
+    background-color: $backgroundColor;
+    box-shadow: 0 0 0 10000px rgba(0,0,0,0.5);
+
+    z-index: 10;
+}
+
+.headerNavbarLinksContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.headerNavbarLink{
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: $blueBytear;
+}
+
+.navbarCloseNavbarIcon{
+    color: $violetBytear;
+}
+
+.headerDesktopNavbar{
+    display: none;
+}
+
+@media (width >= 768px){
+    .header{
+        padding: 20px 20px;
+    }
+
+    .headerLogo{
+        width: 170px;
+        height: auto;
+    }
+    
+    .headerOpenNavbarIcon{
+        width: 48px;
+        height: 48px;
+    }
+    
+    .headerBorderBottom{
+        height: 4px;
+    }
+    
+    .headerNavbar{
+        gap: 120px;
+        width: 55%;
+    }
+    
+    .headerNavbarLinksContainer{
+        gap: 50px;
+    }
+    
+    .headerNavbarLink{
+        font-size: 2rem;
+    }
+    
+    .navbarCloseNavbarIcon{
+        width: 49px;
+        height: 49px;
+    }
+}
+
+@media (width >= 992px){
+    .header{
+        padding: 18px 20px;
+    }
+
+    .headerLogo{
+        width: 110px;
+    }
+    
+    .headerOpenNavbarIconContainer{
+        display: none;
+    }
+    
+    .headerBorderBottom{
+        height: 3px;
+    }
+    
+    .headerNavbar{
+        display: none;
+    }
+    
+    .headerDesktopNavbar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 45%;
+    }
+
+    .headerDesktopNavbarLink{
+        color: $violetBytear;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+}
+
+@media (width >= 1200px){
+    .header{
+        padding: 20px 25px;
+    }
+
+    .headerLogo{
+        width: 130px;
+    }
+    
+    .headerBorderBottom{
+        height: 4px;
+    }
+
+    .headerDesktopNavbarLink{
+        font-size: 1.1rem;
+    }
+}
