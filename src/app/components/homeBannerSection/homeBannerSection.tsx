@@ -1,6 +1,5 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import styles from '../../../../styles/homeBannerSection.module.scss'
 import HomeMobileBanner1 from '../../../../public/img/banner1mobile.png'
 import HomeMobileBanner2 from '../../../../public/img/banner2mobile.jpg'
 import HomeDesktopBanner1 from '../../../../public/img/banner1Desktop.png'
@@ -40,14 +39,14 @@ export default function HomeBannerSection(){
                 }
             }}
         >
-            <SplideSlide className={styles.splideSlide}>
+            <SplideSlide>
                 <Image
                     src={banner1}
                     alt='Banner Inicio 1'
                     fill
                 />
             </SplideSlide>
-            <SplideSlide className={styles.splideSlide}>
+            <SplideSlide>
                 <Image
                     src={banner2}
                     alt='Banner Inicio 2'
