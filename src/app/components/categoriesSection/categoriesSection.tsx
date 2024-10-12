@@ -1,4 +1,4 @@
-import { righteous } from '@/app/ui/fonts'
+import { righteous, roboto } from '@/app/ui/fonts'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import styles from '../../../../styles/categoriesSection.module.scss'
@@ -18,45 +18,52 @@ export default function CategoriesSection(){
             <div className={styles.categoriesContainer}>
                 <Splide
                 options={{
-                    // height: '290px',
-                    // breakpoints: {
-                    //     767:{
-                    //         height: '250px'
-                    //     },
-                    //     991:{
-                    //         height: '450px'
-                    //     },
-                    //     1199:{
-                    //         height: '210px'
-                    //     }
-                    // }
-                    type   : 'loop',
-                    perPage: 2,
+                    breakpoints: {
+                        767:{
+                            perPage: 2,
+                            gap: '1.5rem',
+                            padding: '20px'
+                        },
+                        991:{
+                            perPage: 3,
+                            gap: '2rem',
+                            padding: '25px'
+                        },
+                        1199:{
+                            perPage: 5,
+                            gap: '1.8rem',
+                            padding: '20px'
+                        }
+                    },
+                    type: 'loop',
+                    perPage: 6,
                     perMove: 1,
-                    gap: '1.5rem',
-                    padding: '20px'
+                    gap: '2rem',
+                    padding: '30px'
                 }}
                 >
                     <SplideSlide className={styles.categoryContainer}>
-                        <Link href={'/categoría'}>
+                        <Link href={'/categoria'}>
                             <Image
                                 src={cpuImage}
                                 alt='CPU'
                                 className={styles.categoryImage}
                                 height={180}
                             />
-                            <span className={`${styles.categoryTitle} ${righteous.className}`}>COMPUTADORAS</span>
+                            <span className={`${styles.categoryTitle} ${roboto.className}`}>COMPUTADORAS</span>
                         </Link>
                     </SplideSlide>
 
                     <SplideSlide className={styles.categoryContainer}>
-                        <Image
-                            src={monitorImage}
-                            alt='MONITOR'
-                            className={styles.categoryImage}
-                            height={180}
-                        />
-                        <span className={`${styles.categoryTitle} ${righteous.className}`}>MONITORES</span>
+                        <Link href={'/categoria'}>
+                            <Image
+                                src={monitorImage}
+                                alt='MONITOR'
+                                className={styles.categoryImage}
+                                height={180}
+                            />
+                        </Link>
+                        <span className={`${styles.categoryTitle} ${roboto.className}`}>MONITORES</span>
                     </SplideSlide>
                 </Splide>
             </div>
