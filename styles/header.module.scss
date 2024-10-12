@@ -20,6 +20,15 @@
 .headerOpenNavbarIconContainer{
     display: flex;
     align-items: center;
+    gap: 30px;
+}
+
+.headerNavbarCartLink{
+    display: flex;
+}
+
+.headerCartNavbarIcon{
+    color: $violetBytear;
 }
 
 .headerOpenNavbarIcon{
@@ -63,8 +72,20 @@
 
 .headerNavbarLink{
     font-size: 1.35rem;
-    font-weight: 600;
+    font-weight: 700;
     color: $blueBytear;
+}
+
+.headerNavbarLoginLink{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    background-color: rgb(230,230,230);
+    text-align: center;
+    padding: 4px 15px;
+    border-radius: 10px;
 }
 
 .navbarCloseNavbarIcon{
@@ -82,6 +103,19 @@
 
     .headerLogo{
         width: 170px;
+        height: auto;
+    }
+
+    .headerOpenNavbarIconContainer{
+        gap: 50px;
+    }
+
+    .headerNavbarCartLink{
+        display: flex;
+    }
+    
+    .headerCartNavbarIcon{
+        width: 33px;
         height: auto;
     }
     
@@ -105,6 +139,18 @@
     
     .headerNavbarLink{
         font-size: 2rem;
+    }
+
+    .headerNavbarLoginLink{
+        gap: 15px;
+        font-size: 1.7rem;
+        padding: 6px 15px;
+        border-radius: 15px;
+    }
+
+    .headerLoginIcon{
+        width: 32px;
+        height: auto;
     }
     
     .navbarCloseNavbarIcon{
@@ -146,6 +192,31 @@
         font-size: 1rem;
         font-weight: 500;
     }
+
+    .headerLoginAndCartDesktopContainer{
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .headerDesktopNavbarLoginLink{
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: .9rem;
+        padding: 3px 12px;
+        background-color: rgb(230,230,230);
+        border: 1px solid $violetBytear;
+        border-radius: 10px;
+    }
+
+    .headerDesktopNavbarCartLink{
+        display: flex;
+    }
+
+    .headerDesktopCartNavbarIcon{
+        color: $violetBytear;
+    }
 }
 
 @media (width >= 1200px){
@@ -163,5 +234,26 @@
 
     .headerDesktopNavbarLink{
         font-size: 1.1rem;
+    }
+
+    .headerLoginAndCartDesktopContainer{
+        gap: 35px;
+    }
+
+    .headerDesktopNavbarLoginLink{
+        gap: 15px;
+        font-size: 1rem;
+        padding: 4px 15px;
+        border-radius: 15px;
+    }
+
+    .headerDesktopLoginIcon{
+        width: 22px;
+        height: auto;
+    }
+
+    .headerDesktopCartNavbarIcon{
+        width: 27px;
+        height: auto;
     }
 }

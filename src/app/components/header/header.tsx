@@ -1,7 +1,7 @@
 import styles from '../../../../styles/header.module.scss'
 import BytearLogo from '../../../../public/img/bytear-logo.png'
 import Image from 'next/image'
-import { IconMenu2 } from '@tabler/icons-react';
+import { IconMenu2, IconUserFilled, IconShoppingCartFilled } from '@tabler/icons-react';
 import { IconX } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -30,6 +30,13 @@ export default function Header(){
                 </div>
 
                 <div className={styles.headerOpenNavbarIconContainer}>
+                    <Link href={'/carrito'} className={styles.headerNavbarCartLink}>
+                        <IconShoppingCartFilled
+                            width={27}
+                            height={27}
+                            className={styles.headerCartNavbarIcon}
+                        />
+                    </Link>
                     <IconMenu2
                         stroke={2}
                         width={40}
@@ -42,6 +49,23 @@ export default function Header(){
                 <nav className={styles.headerDesktopNavbar}>
                     <Link href='/' className={styles.headerDesktopNavbarLink}>Inicio</Link>
                     <Link href='/productos' className={styles.headerDesktopNavbarLink}>Productos</Link>
+                    <div className={styles.headerLoginAndCartDesktopContainer}>
+                        <Link href="/ingresar" className={`${styles.headerDesktopNavbarLoginLink} ${styles.headerDesktopNavbarLink}`}>
+                            <IconUserFilled
+                                width={18}
+                                height={18}
+                                className={styles.headerDesktopLoginIcon}
+                            />
+                            Ingresar
+                        </Link>
+                        <Link href={'/carrito'} className={styles.headerDesktopNavbarCartLink}>
+                            <IconShoppingCartFilled
+                                width={23}
+                                height={23}
+                                className={styles.headerDesktopCartNavbarIcon}
+                            />
+                        </Link>
+                    </div>
                 </nav>
             <div className={styles.headerBorderBottom}></div>
             </header>
@@ -51,6 +75,14 @@ export default function Header(){
                     <div className={styles.headerNavbarLinksContainer}>
                         <Link href="/" className={styles.headerNavbarLink}>Inicio</Link>
                         <Link href="/productos" className={styles.headerNavbarLink}>Productos</Link>
+                        <Link href="/ingresar" className={`${styles.headerNavbarLoginLink} ${styles.headerNavbarLink}`}>
+                            <IconUserFilled
+                                width={25}
+                                height={25}
+                                className={styles.headerLoginIcon}
+                            />
+                            Ingresar
+                        </Link>
                     </div>
 
                     <div className={styles.headerNavbarCloseNavbarIconContainer}>
