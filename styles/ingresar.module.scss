@@ -1,0 +1,197 @@
+@import './variables.scss';
+
+.main{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginContainer{
+    border-radius: 10px;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    box-shadow: 0 0 8px 0 gray;
+    padding:  50px 20px;
+}
+
+.logoContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.formContainer{
+    width: 100%;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.labelInputContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.label{
+    font-size: .9rem;
+    font-weight: 500;
+    margin-left: 5px;
+    color: $blueBytear;
+}
+
+.input{
+    border: 2px solid $blueBytear;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    padding: 10px 7px;
+    color: $secondaryTextColor;
+}
+
+.input:focus{
+    border: 2px solid $violetBytear;
+    transition: .4s all;
+    box-shadow: 0 0 3px 0 $violetBytear;
+}
+
+.submitButton{
+    background-color: $blueBytear;
+    border: none;
+    color: $backgroundColor;
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: .4s all;
+}
+
+.submitButton:hover{
+    background-color: rgb(29, 89, 255);
+    transition: .4s all;
+}
+
+.createAccountLink{
+    color: $blueBytear;
+    font-weight: 500;
+}
+
+@media (width >= 768px){
+    .loginContainer{
+        width: 60%;
+        gap: 50px;
+        padding: 80px 50px;
+    }
+
+    .logo{
+        width: 230px;
+        height: auto;
+    }
+    
+    .form{
+        gap: 40px;
+    }
+    
+    .labelInputContainer{
+        gap: 7px;
+    }
+    
+    .label{
+        font-size: 1.15rem;
+    }
+    
+    .input{
+        font-size: 1.3rem;
+        padding: 10px;
+    }
+    
+    .submitButton{
+        font-size: 1.45rem;
+        padding: 12px;
+        margin-top: 17px;
+    }
+    
+    .createAccountText{
+        font-size: 1.3rem;
+    }
+}
+
+@media (width >= 992px){
+    .loginContainer{
+        width: 40%;
+        gap: 30px;
+        padding: 50px 30px;
+    }
+
+    .logo{
+        width: 150px;
+    }
+    
+    .form{
+        gap: 20px;
+    }
+    
+    .labelInputContainer{
+        gap: 5px;
+    }
+    
+    .label{
+        font-size: .9rem;
+    }
+    
+    .input{
+        font-size: 1rem;
+        padding: 7px 10px;
+    }
+    
+    .submitButton{
+        font-size: 1.1rem;
+        padding: 7px;
+        margin-top: 20px;
+    }
+    
+    .createAccountText{
+        font-size: 1rem;
+    }
+}
+
+@media (width >= 1200px){
+    .loginContainer{
+        width: 30%;
+        gap: 40px;
+    }
+
+    .logo{
+        width: 180px;
+    }
+    
+    .form{
+        gap: 30px;
+    }
+    
+    .labelInputContainer{
+        gap: 6px;
+    }
+    
+    .input{
+        padding: 8px 10px;
+    }
+    
+    .submitButton{
+        font-size: 1.2rem;
+        padding: 8px;
+        margin-top: 15px;
+    }
+    
+    .createAccountText{
+        font-size: 1rem;
+    }
+}
