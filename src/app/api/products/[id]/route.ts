@@ -1,10 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import {conn} from "@/libs/mysql"
+import { NextApiRequest } from "next";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { QueryResult, Product } from "@/interfaces/types";
 
-export async function GET(request, {params}){
+export async function GET(
+    request: NextApiRequest,
+    {params}: {params: Params}
+){
     try {
-        const result = await conn.query("SELECT * FROM products WHERE id = ?", [params.id])
-        console.log("RESULTADO => ", result);
+        const result: Product[] = await conn.query("SELECT * FROM products WHERE id = ?", [params.id])
 
         if(result.length === 0){
             return NextResponse.json(
@@ -32,13 +37,17 @@ export async function GET(request, {params}){
     }
 }
 
-export async function DELETE(request, {params}){
+export async function DELETE(
+    request: NextApiRequest,
+    {params}: {params: Params}
+){
     try {
-        const productImageResult = await conn.query("DELETE FROM products_images WHERE product_id = ?", [params.id])
+        const productImageResult: QueryResult = await conn.query("DELETE FROM products_images WHERE product_id = ?", [params.id])
+        
         // VERIFICAR SI BORRA TODAS LAS IMAGENES CON EL ID DEL PRODUCTO
-        const productResult = await conn.query("DELETE FROM products WHERE id = ?", [params.id])
+        const productResult: QueryResult = await conn.query("DELETE FROM products WHERE id = ?", [params.id])
 
-        if(productResult.affectedRows === 0){
+        if(productImageResult.affectedRows === 0){
             return NextResponse.json(
                 {
                     message: "Producto no encontrado"
@@ -47,6 +56,17 @@ export async function DELETE(request, {params}){
                     status: 404
                 }
             )
+        } else {
+            if(productResult.affectedRows === 0){
+                return NextResponse.json(
+                    {
+                        message: "Producto no encontrado"
+                    },
+                    {
+                        status: 404
+                    }
+                )
+            }
         }
 
         return new Response(null, {
@@ -66,6 +86,38 @@ export async function DELETE(request, {params}){
     }
 }
 
-export function PUT(){
-    return NextResponse.json('actualizando un producto')
+export async function PUT(
+    request: NextApiRequest,
+    {params}: {params: Params}
+){
+    try {
+        const data = await request.json()
+        const result: QueryResult = await conn.query("UPDATE products SET ? WHERE id = ?", [data, params.id])
+        
+        if(result.affectedRows === 0){
+            return NextResponse.json(
+                {
+                    message: "Producto no encontrado"
+                },
+                {
+                    status: 404
+                }
+            )
+        }
+
+        const updatedProduct = await conn.query("SELECT * FROM products WHERE id = ?", [params.id])
+        
+        return NextResponse.json(updatedProduct)
+    } catch (error) {
+        const errorMessage = (error instanceof Error) ? error.message : "Error desconocido"
+
+        return NextResponse.json(
+            {
+                message: errorMessage
+            },
+            {
+                status: 500
+            }
+        )
+    }
 }

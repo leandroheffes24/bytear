@@ -28,3 +28,14 @@ export interface Brand{
     id: string,
     name: string
 }
+
+export interface QueryResult{
+    fieldCount: number,
+    affectedRows: number,
+    insertId: number,
+    serverStatus: number,
+    warningCount: number,
+    message: string,
+    protocol41: boolean,
+    changedRows: number
+}
