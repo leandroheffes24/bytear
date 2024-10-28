@@ -11,7 +11,9 @@
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
     "@tabler/icons-react": "^3.19.0",
+    "axios": "^1.7.7",
     "dotenv": "^16.4.5",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.11.3",
     "next": "14.2.14",
     "react": "^18",

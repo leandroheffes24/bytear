@@ -1,11 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import {conn} from "@/libs/mysql"
-import { NextApiRequest } from "next";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { QueryResult, Product } from "@/interfaces/types";
 
 export async function GET(
-    request: NextApiRequest,
+    request: NextRequest,
     {params}: {params: Params}
 ){
     try {
@@ -38,7 +37,7 @@ export async function GET(
 }
 
 export async function DELETE(
-    request: NextApiRequest,
+    request: NextRequest,
     {params}: {params: Params}
 ){
     try {
@@ -87,7 +86,7 @@ export async function DELETE(
 }
 
 export async function PUT(
-    request: NextApiRequest,
+    request: NextRequest,
     {params}: {params: Params}
 ){
     try {
