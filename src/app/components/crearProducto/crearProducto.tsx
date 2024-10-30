@@ -1,7 +1,9 @@
 'use client'
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import axios from 'axios'
 import styles from "../../../../styles/crearProducto.module.scss"
+import { useRouter } from "next/navigation";
+import { Brand, Category } from "@/interfaces/types";
 
 export default function CrearProducto (){
     const [product, setProduct] = useState({
@@ -16,6 +18,24 @@ export default function CrearProducto (){
     })
 
     const form = useRef<HTMLFormElement>(null)
+    const router = useRouter()
+    const [categories, setCategories] = useState<Category[]>([])
+    const [brands, setBrands] = useState<Brand[]>([])
+
+    useEffect(() => {
+        const loadCategories = async () => {
+            const {data} = await axios.get<Category[]>(`${process.env.URL_WEBSITE}/api/categories`)
+            setCategories(data)
+        }
+
+        const loadBrands = async () => {
+            const {data} = await axios.get<Brand[]>(`${process.env.URL_WEBSITE}/api/brands`)
+            setBrands(data)
+        }
+
+        loadCategories()
+        loadBrands()
+    }, [])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setProduct({
@@ -29,13 +49,14 @@ export default function CrearProducto (){
         const res = await axios.post("/api/products", product)
         console.log(res);
         if(form.current){form.current.reset()}
+        router.push("/productos")
     }
 
     return(
         <form className={styles.createProductForm} onSubmit={handleSubmit} ref={form}>
             <div className={styles.labelAndInputContainer}>
                 <label className={styles.labelForm} htmlFor="name">Nombre del producto</label>
-                <input className={styles.inputForm} type="text" placeholder="name" id="name" onChange={handleChange} />
+                <input className={styles.inputForm} type="text" placeholder="name" id="name" onChange={handleChange} autoFocus />
             </div>
 
             <div className={styles.labelAndInputContainer}>
@@ -62,8 +83,9 @@ export default function CrearProducto (){
                 <label className={styles.labelForm} htmlFor="category_id">Categoría</label>
                 <select name="category_id" id="category_id" onChange={handleChange}>
                     <option value="" defaultChecked></option>
-                    <option value="e0f39834-c598-4a87-b0c9-b4c0b93e4887">Monitores</option>
-                    <option value="COMPUTADORAS">Computadoras</option>
+                    {categories.map(category => (
+                        <option key={category.id} value={category.id}>{category.name}</option>
+                    ))}
                 </select>
             </div>
 
@@ -71,8 +93,9 @@ export default function CrearProducto (){
                 <label className={styles.labelForm} htmlFor="brand_id">Marca</label>
                 <select name="brand_id" id="brand_id" onChange={handleChange}>
                     <option value="" defaultChecked></option>
-                    <option value="e11c2caf-d54b-4be2-8b89-7553bb3bb4c3">Logitech</option>
-                    <option value="ASUS">ASUS</option>
+                    {brands.map(brand => (
+                        <option key={brand.id} value={brand.id}>{brand.name}</option>
+                    ))}
                 </select>
             </div>
 
