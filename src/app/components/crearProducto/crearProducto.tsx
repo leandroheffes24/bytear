@@ -24,17 +24,25 @@ export default function CrearProducto (){
 
     useEffect(() => {
         const loadCategories = async () => {
-            const {data} = await axios.get<Category[]>(`${process.env.URL_WEBSITE}/api/categories`)
-            setCategories(data)
+            try {
+                const {data} = await axios.get<Category[]>(`${process.env.NEXT_PUBLIC_URL_WEBSITE}/api/categories`)
+                setCategories(data)
+            } catch (error) {
+                console.error("Error cargando categorías", error)
+            }
         }
 
         const loadBrands = async () => {
-            const {data} = await axios.get<Brand[]>(`${process.env.URL_WEBSITE}/api/brands`)
-            setBrands(data)
+            try {
+                const {data} = await axios.get<Brand[]>(`${process.env.NEXT_PUBLIC_URL_WEBSITE}/api/brands`)
+                setBrands(data)
+            } catch (error) {
+                console.error("Error cargando marcas", error)
+            }
         }
 
         loadCategories()
-        loadBrands()
+        loadBrands()       
     }, [])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
