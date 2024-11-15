@@ -1,13 +1,36 @@
+'use client'
+
 import { righteous, roboto } from '@/app/ui/fonts'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import styles from '../../../../styles/categoriesSection.module.scss'
 import Image from 'next/image';
-import cpuImage from '../../../../public/img/cpu.webp'
-import monitorImage from '../../../../public/img/monitor.jpg'
 import Link from 'next/link';
+import axios from 'axios';
+import { Category } from '@/interfaces/types';
+import monitor from '../../../../public/img/monitor.webp'
+import { useState, useEffect } from 'react';
 
 export default function CategoriesSection(){
+    const [categories, setCategories] = useState<Category[]>([])
+
+    useEffect(() => {
+        async function fetchCategories(){
+            try {
+                const {data} = await axios.get<Category[]>(`/api/categories`)
+                setCategories(data)
+            } catch (error) {
+                console.error("Error fetching categories ", error)
+            }
+        }
+
+        fetchCategories()
+    }, [])
+
+    if (categories.length === 0) {
+        return <div>Cargando...</div>
+    }
+
     return(
         <section className={styles.categoriesSection}>
             <div className={styles.categoriesTitleContainer}>
@@ -42,29 +65,19 @@ export default function CategoriesSection(){
                     padding: '30px'
                 }}
                 >
-                    <SplideSlide className={styles.categoryContainer}>
-                        <Link href={'/categoria'}>
+                    {categories.map(category => (
+                        <SplideSlide key={category.id} className={styles.categoryContainer}>
+                        <Link href={`/categoria/${category.name}`}>
                             <Image
-                                src={cpuImage}
-                                alt='CPU'
+                                src={monitor}
+                                alt={`${category.name} image`}
                                 className={styles.categoryImage}
                                 height={180}
                             />
-                            <span className={`${styles.categoryTitle} ${roboto.className}`}>COMPUTADORAS</span>
+                            <span className={`${styles.categoryTitle} ${roboto.className}`}>{category.name.toUpperCase()}</span>
                         </Link>
                     </SplideSlide>
-
-                    <SplideSlide className={styles.categoryContainer}>
-                        <Link href={'/categoria'}>
-                            <Image
-                                src={monitorImage}
-                                alt='MONITOR'
-                                className={styles.categoryImage}
-                                height={180}
-                            />
-                        </Link>
-                        <span className={`${styles.categoryTitle} ${roboto.className}`}>MONITORES</span>
-                    </SplideSlide>
+                    ))}
                 </Splide>
             </div>
         </section>

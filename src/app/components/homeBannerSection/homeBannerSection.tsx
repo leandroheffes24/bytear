@@ -21,6 +21,10 @@ export default function HomeBannerSection(){
         }
     }, [])
 
+    if(banner1 === "" || banner2 === ""){
+        return <div>cargando...</div>
+    }
+
     return(
         <Splide
             options={{

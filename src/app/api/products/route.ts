@@ -26,7 +26,7 @@ async function uploadFileToS3(file: Buffer, fileName: string): Promise<string>{
 
     const params = {
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: `${fileName}-${Date.now()}`,
+        Key: `products/${fileName}-${Date.now()}`,
         Body: fileBuffer,
         ContentType: "image/webp"
     }

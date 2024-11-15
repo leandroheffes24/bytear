@@ -1,3 +1,4 @@
+'use client'
 import styles from '../../../../styles/header.module.scss'
 import BytearLogo from '../../../../public/img/bytear-logo.png'
 import Image from 'next/image'

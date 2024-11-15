@@ -6,35 +6,60 @@ import { useRouter } from "next/navigation";
 
 export default function CrearCategoria (){
     const [category, setCategory] = useState({
-        name: ""
+        name: "",
+        image: null
     })
 
     const form = useRef<HTMLFormElement>(null)
     const router = useRouter()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setCategory({
-            ...category,
-            [e.target.id]: e.target.value
-        })
+        if(e.target instanceof HTMLInputElement && e.target.type === "file"){
+            setCategory({
+                ...category,
+                [e.target.id]: e.target.files ? e.target.files[0] : null
+            })            
+        } else {
+            setCategory({
+                ...category,
+                [e.target.id]: e.target.value
+            })
+        }
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const res = await axios.post("/api/categories", category)
-        console.log(res);
-        if(form.current){form.current.reset()}
-        router.push("/productos")
+        const formData = new FormData()
+        formData.append("name", category.name)
+        if(category.image){
+            formData.append("image", category.image)
+        }
+
+        try {
+            const res = await axios.post("/api/categories", formData)
+            console.log(res);
+            if(form.current){form.current.reset()}
+            router.push("/")
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return(
-        <form className={styles.createProductForm} onSubmit={handleSubmit} ref={form}>
-            <div className={styles.labelAndInputContainer}>
-                <label className={styles.labelForm} htmlFor="name">Nombre de la categoría</label>
-                <input className={styles.inputForm} type="text" placeholder="nombre" id="name" onChange={handleChange} autoFocus />
-            </div>
+        <main className={styles.main}>
+            <form className={styles.createProductForm} onSubmit={handleSubmit} ref={form}>
+                <div className={styles.labelAndInputContainer}>
+                    <label className={styles.labelForm} htmlFor="name">Nombre de la categoría</label>
+                    <input className={styles.inputForm} type="text" placeholder="nombre" id="name" onChange={handleChange} autoFocus />
+                </div>
 
-            <button className={styles.submitButton} type="submit">Crear categoria</button>
-        </form>
+                <div className={styles.labelAndInputContainer}>
+                    <label className={styles.labelForm} htmlFor="image">Imágen</label>
+                    <input type="file" id="image" onChange={handleChange} />
+                </div>
+
+                <button className={styles.submitButton} type="submit">Crear categoria</button>
+            </form>
+        </main>
     )
 }
