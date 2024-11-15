@@ -5,8 +5,19 @@ export interface Product{
     not_discount_price: number,
     stock: number,
     description: string,
-    category_id: number,
-    brand_id: number
+    category_id: string,
+    brand_id: string
+}
+
+export interface ProductUpload{
+    name: string,
+    discount_price: number,
+    not_discount_price: number,
+    stock: number,
+    description: string,
+    category_id: string,
+    brand_id: string,
+    image: File | null
 }
 
 export interface User{

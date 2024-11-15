@@ -14,3 +14,53 @@ body{
 a{
     text-decoration: none;
 }
+
+label{
+    font-size: .9rem;
+    font-weight: 500;
+    margin-left: 5px;
+    color: $blueBytear;
+}
+
+input, textarea, select{
+    border: 2px solid $blueBytear;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    padding: 10px 7px;
+    color: $secondaryTextColor;
+}
+
+input:focus{
+    border: 2px solid $violetBytear;
+    transition: .4s all;
+    box-shadow: 0 0 3px 0 $violetBytear;
+}
+
+@media(width>=768px){
+    label{
+        font-size: 1.15rem;
+    }
+    
+    input, textarea{
+        font-size: 1.3rem;
+        padding: 10px;
+    }
+}
+
+@media(width>=992px){
+    label{
+        font-size: .9rem;
+    }
+    
+    input, textarea{
+        font-size: 1rem;
+        padding: 7px 10px;
+    }
+}
+
+@media(width>=1200px){
+    input, textarea{
+        padding: 8px 10px;
+    }
+}

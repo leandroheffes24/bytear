@@ -1,10 +1,83 @@
+@import './variables.scss';
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .createProductForm{
     display: flex;
     flex-direction: column;
     gap: 30px;
+    border-radius: 10px;
+    width: 85%;
+    box-shadow: 0 0 8px 0 gray;
+    padding:  50px 20px;
+    margin: 40px 0;
 }
 
 .labelAndInputContainer{
     display: flex;
     flex-direction: column;
+}
+
+.submitButton{
+    background-color: $blueBytear;
+    border: none;
+    color: $backgroundColor;
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: .4s all;
+}
+
+.submitButton:hover{
+    background-color: rgb(29, 89, 255);
+    transition: .4s all;
+}
+
+@media(width>=768px){
+    .createProductForm{
+        width: 75%;
+        gap: 50px;
+        padding: 80px 50px;
+        margin: 80px 0;
+    }
+
+    .submitButton{
+        font-size: 1.45rem;
+        padding: 12px;
+        margin-top: 17px;
+    }
+}
+
+@media(width>=992px){
+    .createProductForm{
+        width: 60%;
+        gap: 30px;
+        padding: 50px 30px;
+        margin: 80px 0;
+    }
+
+    .submitButton{
+        font-size: 1.1rem;
+        padding: 7px;
+        margin-top: 20px;
+    }
+}
+
+@media(width>=1200px){
+    .createProductForm{
+        width: 60%;
+        gap: 40px;
+    }
+
+    .submitButton{
+        font-size: 1.2rem;
+        padding: 8px;
+        margin-top: 15px;
+    }
 }

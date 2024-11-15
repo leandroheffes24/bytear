@@ -20,7 +20,7 @@ const s3Client = new S3Client({
     }
 })
 
-async function uploadFileToS3(file, fileName){
+async function uploadFileToS3(file: Buffer, fileName: string): Promise<string>{
     const fileBuffer = file
     console.log(fileName);
 
@@ -61,61 +61,39 @@ export async function POST(request: NextRequest){
         if (!file || !(file instanceof File)) {
             return NextResponse.json({ error: "File is required and must be of type 'File'" }, { status: 400 });
         }
-
         const buffer = Buffer.from(await file.arrayBuffer());
-
         const uploadedFileName = await uploadFileToS3(buffer, file.name);
-        
-        return NextResponse.json({ uploadedFileName }, { status: 200 });
 
-        // const {name, discount_price, not_discount_price, stock, description, category_id, brand_id, image} = await request.json()
-        // const productId = uuid4()
+        const productId = uuid4()
+        const discountPrice = formData.get("discount_price")
+        const notDiscountPrice = formData.get("not_discount_price")
+        const stock = formData.get("stock")
 
-        // const productResult: Product = await conn.query("INSERT INTO products SET ?", {
-        //     id: productId,
-        //     name: name,
-        //     discount_price: discount_price,
-        //     not_discount_price: not_discount_price,
-        //     stock: stock,
-        //     description: description,
-        //     category_id: category_id,
-        //     brand_id: brand_id
-        // })
+        const productResult: Product = await conn.query("INSERT INTO products SET ?", {
+            id: productId,
+            name: formData.get("name"),
+            discount_price: discountPrice,
+            not_discount_price: notDiscountPrice,
+            stock: stock,
+            description: formData.get("description"),
+            category_id: formData.get("category_id"),
+            brand_id: formData.get("brand_id")
+        })
     
-        // const product_imageResult = await conn.query("INSERT INTO products_images SET ?", {
-        //     id: uuid4(),
-        //     product_id: productId,
-        //     image: image
-        // })
+        const product_imageResult = await conn.query("INSERT INTO products_images SET ?", {
+            id: uuid4(),
+            product_id: productId,
+            image: uploadedFileName
+        })
 
-        // console.log(productResult, product_imageResult);
+        console.log(productResult, product_imageResult);
         
-        // return NextResponse.json({
-        //     productId,
-        //     name,
-        //     discount_price,
-        //     not_discount_price,
-        //     stock,
-        //     description,
-        //     category_id,
-        //     brand_id,
-        //     image
-        // })
+        return NextResponse.json({
+            productId
+        })
     } catch (error) {
-        // console.error(error);
-
-        // const errorMessage = (error instanceof Error) ? error.message : "Error desconocido"
-
-        // return NextResponse.json(
-        //     {
-        //         message: errorMessage
-        //     },
-        //     {
-        //         status: 500
-        //     }
-        // )
         console.error('Error en el endpoint POST:', error);
-    const errorMessage = (error instanceof Error) ? error.message : "Error desconocido";
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
+        const errorMessage = (error instanceof Error) ? error.message : "Error desconocido";
+        return NextResponse.json({ error: errorMessage }, { status: 500 });
     }
 }
