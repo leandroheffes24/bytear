@@ -2,39 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import {conn} from '@/libs/mysql'
 import uuid4 from 'uuid4'
 import {Product} from '@/interfaces/types'
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-
-const region = process.env.AWS_BUCKET_REGION
-const accessKeyId = process.env.AWS_BUCKET_ACCESS_KEY
-const secretAccessKey = process.env.AWS_BUCKET_SECRET_ACCESS_KEY
-
-if(!region || !accessKeyId || !secretAccessKey){
-    throw new Error('Las variables de entorno para AWS no estan correctamente definidas')
-}
-
-const s3Client = new S3Client({
-    region: region,
-    credentials:{
-        accessKeyId: accessKeyId,
-        secretAccessKey:  secretAccessKey
-    }
-})
-
-async function uploadFileToS3(file: Buffer, fileName: string): Promise<string>{
-    const fileBuffer = file
-    console.log(fileName);
-
-    const params = {
-        Bucket: process.env.AWS_BUCKET_NAME,
-        Key: `products/${fileName}-${Date.now()}`,
-        Body: fileBuffer,
-        ContentType: "image/webp"
-    }
-
-    const command = new PutObjectCommand(params)
-    await s3Client.send(command)
-    return fileName
-}
+import { uploadFileToS3 } from "@/libs/uploadToS3";
 
 export async function GET(){
     try {
@@ -62,7 +30,7 @@ export async function POST(request: NextRequest){
             return NextResponse.json({ error: "File is required and must be of type 'File'" }, { status: 400 });
         }
         const buffer = Buffer.from(await file.arrayBuffer());
-        const uploadedFileName = await uploadFileToS3(buffer, file.name);
+        const uploadedFileName = await uploadFileToS3(buffer, file.name, "products");
 
         const productId = uuid4()
         const discountPrice = formData.get("discount_price")

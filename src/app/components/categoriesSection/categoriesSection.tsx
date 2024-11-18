@@ -67,7 +67,7 @@ export default function CategoriesSection(){
                 >
                     {categories.map(category => (
                         <SplideSlide key={category.id} className={styles.categoryContainer}>
-                        <Link href={`/categoria/${category.name}`}>
+                        <Link href={`/categoria/${category.name.toLowerCase()}`}>
                             <Image
                                 src={monitor}
                                 alt={`${category.name} image`}

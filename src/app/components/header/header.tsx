@@ -49,7 +49,6 @@ export default function Header(){
 
                 <nav className={styles.headerDesktopNavbar}>
                     <Link href='/' className={styles.headerDesktopNavbarLink}>Inicio</Link>
-                    <Link href='/productos' className={styles.headerDesktopNavbarLink}>Productos</Link>
                     <div className={styles.headerLoginAndCartDesktopContainer}>
                         <Link href="/ingresar" className={`${styles.headerDesktopNavbarLoginLink} ${styles.headerDesktopNavbarLink}`}>
                             <IconUserFilled
@@ -75,7 +74,6 @@ export default function Header(){
                 <nav className={styles.headerNavbar}>
                     <div className={styles.headerNavbarLinksContainer}>
                         <Link href="/" className={styles.headerNavbarLink}>Inicio</Link>
-                        <Link href="/productos" className={styles.headerNavbarLink}>Productos</Link>
                         <Link href="/ingresar" className={`${styles.headerNavbarLoginLink} ${styles.headerNavbarLink}`}>
                             <IconUserFilled
                                 width={25}

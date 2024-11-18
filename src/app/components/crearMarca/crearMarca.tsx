@@ -28,13 +28,15 @@ export default function CrearMarca (){
     }
 
     return(
-        <form className={styles.createProductForm} onSubmit={handleSubmit} ref={form}>
-            <div className={styles.labelAndInputContainer}>
-                <label className={styles.labelForm} htmlFor="name">Nombre de la marca</label>
-                <input className={styles.inputForm} type="text" placeholder="nombre" id="name" onChange={handleChange} autoFocus />
-            </div>
+        <main className={styles.main}>
+            <form className={styles.createProductForm} onSubmit={handleSubmit} ref={form}>
+                <div className={styles.labelAndInputContainer}>
+                    <label className={styles.labelForm} htmlFor="name">Nombre de la marca</label>
+                    <input className={styles.inputForm} type="text" placeholder="nombre" id="name" onChange={handleChange} autoFocus />
+                </div>
 
-            <button className={styles.submitButton} type="submit">Crear marca</button>
-        </form>
+                <button className={styles.submitButton} type="submit">Crear marca</button>
+            </form>
+        </main>
     )
 }
