@@ -26,10 +26,6 @@ export default function CategoriesSection(){
         fetchCategories()
     }, [])
 
-    if (categories.length === 0) {
-        return <div>Cargando...</div>
-    }
-
     return(
         <section className={styles.categoriesSection}>
             <div className={styles.categoriesTitleContainer}>
@@ -61,7 +57,8 @@ export default function CategoriesSection(){
                     perPage: 6,
                     perMove: 1,
                     gap: '2rem',
-                    padding: '30px'
+                    padding: '30px',
+                    pagination: false
                 }}
                 >
                     {categories.map(category => (

@@ -30,8 +30,13 @@
     text-align: center;
     padding-bottom: 15px;
     margin: 5px 0;
-    box-shadow: 0 0 5px 0 gray;
     cursor: pointer;
+    transition: .3s all;
+}
+
+.categoryContainer:hover{
+    box-shadow: 0 0 5px 0 gray;
+    transition: .3s all;
 }
 
 .categoryImage{
@@ -71,7 +76,12 @@
         border-radius: 10px;
         padding-bottom: 20px;
         margin: 10px 0;
+        transition: .3s all;
+    }
+
+    .categoryContainer:hover{
         box-shadow: 0 0 10px 0 gray;
+        transition: .3s all;
     }
     
     .categoryImage{
@@ -107,7 +117,12 @@
     .categoryContainer{
         border-radius: 5px;
         padding-bottom: 15px;
+        transition: .3s all;
+    }
+
+    .categoryContainer:hover{
         box-shadow: 0 0 5px 0 gray;
+        transition: .3s all;
     }
     
     .categoryImage{
@@ -138,7 +153,12 @@
     
     .categoryContainer{
         padding-bottom: 20px;
+        transition: .3s all;
+    }
+
+    .categoryContainer:hover{
         box-shadow: 0 0 10px 0 gray;
+        transition: .3s all;
     }
     
     .categoryImage{

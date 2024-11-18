@@ -1,0 +1,64 @@
+@import './variables.scss';
+
+.footer{
+    background: linear-gradient(45deg, rgba(0,70,255,1) 0%, rgba(120,0,255,1) 70%);
+    color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 gray;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.footerSectionTitle{
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.contactSection{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contactSectionInformationContainer{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contactSectionIcon{
+    width: 25px;
+}
+
+.contactSectionText{
+    font-size: .9rem;
+}
+
+
+
+.separator{
+    background-color: white;
+    height: 2px;
+    width: 100%;
+}
+
+.developerInfoAndCopyright{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+}
+
+.copyrightText{
+    font-size: .9rem;
+}
+
+.developerText{
+    font-size: .9rem;
+}
+
+.developerLink{
+    font-weight: bold;
+    color: white;
+}
