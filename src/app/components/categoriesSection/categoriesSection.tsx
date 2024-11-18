@@ -7,17 +7,16 @@ import styles from '../../../../styles/categoriesSection.module.scss'
 import Image from 'next/image';
 import Link from 'next/link';
 import axios from 'axios';
-import { Category } from '@/interfaces/types';
-import monitor from '../../../../public/img/monitor.webp'
+import { CategoryAndImage } from '@/interfaces/types';
 import { useState, useEffect } from 'react';
 
 export default function CategoriesSection(){
-    const [categories, setCategories] = useState<Category[]>([])
+    const [categories, setCategories] = useState<CategoryAndImage[]>([])
 
     useEffect(() => {
         async function fetchCategories(){
             try {
-                const {data} = await axios.get<Category[]>(`/api/categories`)
+                const {data} = await axios.get<CategoryAndImage[]>(`/api/categories`)
                 setCategories(data)
             } catch (error) {
                 console.error("Error fetching categories ", error)
@@ -69,10 +68,11 @@ export default function CategoriesSection(){
                         <SplideSlide key={category.id} className={styles.categoryContainer}>
                         <Link href={`/categoria/${category.name.toLowerCase()}`}>
                             <Image
-                                src={monitor}
+                                src={category.image}
                                 alt={`${category.name} image`}
                                 className={styles.categoryImage}
                                 height={180}
+                                width={180}
                             />
                             <span className={`${styles.categoryTitle} ${roboto.className}`}>{category.name.toUpperCase()}</span>
                         </Link>

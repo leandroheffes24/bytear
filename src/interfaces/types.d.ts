@@ -35,6 +35,16 @@ export interface Category{
     name: string
 }
 
+export interface CategoryImage{
+    image: string
+}
+
+export interface CategoryAndImage{
+    id: string,
+    name: string,
+    image: string
+}
+
 export interface Brand{
     id: string,
     name: string

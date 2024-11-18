@@ -31,6 +31,7 @@ export async function POST(request: NextRequest){
         }
         const buffer = Buffer.from(await file.arrayBuffer());
         const uploadedFileName = await uploadFileToS3(buffer, file.name, "products");
+        const imageUrl = `${process.env.AWS_BUCKET_IMAGE_URL}/products/${uploadedFileName}`
 
         const productId = uuid4()
         const discountPrice = formData.get("discount_price")
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest){
         const product_imageResult = await conn.query("INSERT INTO products_images SET ?", {
             id: uuid4(),
             product_id: productId,
-            image: uploadedFileName
+            image: imageUrl
         })
 
         console.log(productResult, product_imageResult);

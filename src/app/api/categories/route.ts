@@ -1,13 +1,20 @@
 import { NextResponse, NextRequest } from "next/server";
 import {conn} from '@/libs/mysql'
 import uuid4 from 'uuid4'
-import {Category} from '@/interfaces/types'
+import {Category, CategoryImage} from '@/interfaces/types'
 import { uploadFileToS3 } from "@/libs/uploadToS3";
 
 export async function GET(){
     try {
-        const results = await conn.query("SELECT * FROM categories")
-        return NextResponse.json(results)
+        const results: Category[] = await conn.query("SELECT * FROM categories")
+
+        const categoriesWithImages = await Promise.all(results.map(async (category: Category) => {
+            const [imageResult]: CategoryImage[] = await conn.query("SELECT image FROM categories_images WHERE category_id = ?", [category.id])
+            const imageUrl = imageResult.image || null
+            return {...category, image: imageUrl}
+        }))
+
+        return NextResponse.json(categoriesWithImages)
     } catch (error) {
         const errorMessage = (error instanceof Error) ? error.message : "Error desconocido"
         return NextResponse.json(
@@ -35,6 +42,7 @@ export async function POST(request: NextRequest){
         }
         const buffer = Buffer.from(await file.arrayBuffer());
         const uploadedFileName = await uploadFileToS3(buffer, file.name, "categories");
+        const imageUrl = `${process.env.AWS_BUCKET_IMAGE_URL}/categories/${uploadedFileName}`
 
         const categoryId = uuid4()
 
@@ -46,7 +54,7 @@ export async function POST(request: NextRequest){
         const category_imageResult = await conn.query("INSERT INTO categories_images SET ?", {
             id: uuid4(),
             category_id: categoryId,
-            image: uploadedFileName
+            image: imageUrl
         })
 
         console.log(categoryResult, category_imageResult);
