@@ -9,6 +9,18 @@ export interface Product{
     brand_id: string
 }
 
+export interface ProductAndImage{
+    id: string,
+    name: string,
+    discount_price: number,
+    not_discount_price: number,
+    stock: number,
+    description: string,
+    category_id: string,
+    brand_id: string,
+    image: string
+}
+
 export interface ProductUpload{
     name: string,
     discount_price: number,
@@ -35,7 +47,7 @@ export interface Category{
     name: string
 }
 
-export interface CategoryImage{
+export interface Image{
     image: string
 }
 

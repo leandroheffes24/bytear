@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import {conn} from '@/libs/mysql'
 import uuid4 from 'uuid4'
-import {Category, CategoryImage} from '@/interfaces/types'
+import {Category, Image} from '@/interfaces/types'
 import { uploadFileToS3 } from "@/libs/uploadToS3";
 
 export async function GET(){
@@ -9,7 +9,7 @@ export async function GET(){
         const results: Category[] = await conn.query("SELECT * FROM categories")
 
         const categoriesWithImages = await Promise.all(results.map(async (category: Category) => {
-            const [imageResult]: CategoryImage[] = await conn.query("SELECT image FROM categories_images WHERE category_id = ?", [category.id])
+            const [imageResult]: Image[] = await conn.query("SELECT image FROM categories_images WHERE category_id = ?", [category.id])
             const imageUrl = imageResult.image || null
             return {...category, image: imageUrl}
         }))
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest){
 
         const categoryResult: Category = await conn.query("INSERT INTO categories SET ?", {
             id: categoryId,
-            name: name
+            name: name.toLowerCase()
         })
 
         const category_imageResult = await conn.query("INSERT INTO categories_images SET ?", {
