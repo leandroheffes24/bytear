@@ -4,6 +4,7 @@ import styles from '../../../../styles/productosPorCategoria.module.scss'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
+import { righteous } from '@/app/ui/fonts'
 
 export default function ProductosPorCategoria({categoryName}: {categoryName: string}){
     const [products, setProducts] = useState<ProductAndImage[]>([])
@@ -22,22 +23,47 @@ export default function ProductosPorCategoria({categoryName}: {categoryName: str
     }, [categoryName])
 
     return(
-        <section>
-            {products.map(product => (
-                <div key={product.id}>
-                    <Image
-                        src={product.image}
-                        alt={`${product.name} image`}
-                        width={100}
-                        height={100}
-                    />
-                    <p>{product.name}</p>
-                    <p>{product.discount_price}</p>
-                    <p>{product.not_discount_price}</p>
-                    <p>{product.stock}</p>
-                    <p>{product.description}</p>
-                </div>
-            ))}
-        </section>
+        <main className={styles.categoryMain}>
+            <div className={styles.categoryTitleContainer}>
+                <h3 className={`${styles.categoryTitle} ${righteous.className}`}>{categoryName.toUpperCase()}</h3>
+            </div>
+
+            <div className={styles.filterAndOrderProductsButtonsContainer}>
+                <button className={styles.filterAndOrderProductsButton}>
+                    FILTRAR
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className={styles.filterAndOrderProductsIcon}>
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z" />
+                    </svg>
+                </button>
+
+                <button className={styles.filterAndOrderProductsButton}>
+                    ORDENAR
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className={styles.filterAndOrderProductsIcon}>
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 8l4 -4l4 4" />
+                        <path d="M7 4l0 9" />
+                        <path d="M13 16l4 4l4 -4" />
+                        <path d="M17 10l0 10" />
+                    </svg>
+                </button>
+            </div>
+
+            <section className={styles.productsSection}>
+                {products.map(product => (
+                    <div className={styles.productContainer} key={product.id}>
+                        <Image
+                            src={product.image}
+                            alt={`${product.name} imágen`}
+                            width={100}
+                            height={100}
+                            className={styles.productImage}
+                        />
+                        <p className={styles.productName}>{product.name}</p>
+                        <p className={styles.productPrice}>${product.discount_price}</p>
+                    </div>
+                ))}
+            </section>
+        </main>
     )
 }

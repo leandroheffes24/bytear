@@ -1,0 +1,70 @@
+@import './variables.scss';
+
+.categoryMain{
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.categoryTitle{
+    font-size: 1.8rem;
+    color: $blueBytear;
+}
+
+.filterAndOrderProductsButtonsContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.filterAndOrderProductsButton{
+    background: none;
+    color: $blueBytear;
+    border: 2px solid $blueBytear;
+    border-radius: 15px;
+    padding: 3px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filterAndOrderProductsIcon{
+    width: 15px;
+}
+
+.productsSection{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.productContainer{
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 4px 0px rgb(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding-bottom: 15px;
+}
+
+.productImage{
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.productName{
+    padding: 15px;
+    text-align: center;
+    font-size: .9rem;
+}
+
+.productPrice{
+    color: $blueBytear;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
