@@ -77,7 +77,7 @@ export default function CrearProducto (){
             const res = await axios.post("/api/products", formData)
             console.log(res);
             if(form.current){form.current.reset()}
-            router.push("/productos")
+            router.push("/")
         } catch (error) {
             console.log(error);
         }

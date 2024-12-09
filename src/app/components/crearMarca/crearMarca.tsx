@@ -24,7 +24,7 @@ export default function CrearMarca (){
         const res = await axios.post("/api/brands", brand)
         console.log(res);
         if(form.current){form.current.reset()}
-        router.push("/productos")
+        router.push("/")
     }
 
     return(

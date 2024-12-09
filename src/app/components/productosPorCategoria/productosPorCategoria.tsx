@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
 import { righteous } from '@/app/ui/fonts'
+import Link from 'next/link'
 
 export default function ProductosPorCategoria({categoryName}: {categoryName: string}){
     const [products, setProducts] = useState<ProductAndImage[]>([])
@@ -27,6 +28,10 @@ export default function ProductosPorCategoria({categoryName}: {categoryName: str
             <div className={styles.categoryTitleContainer}>
                 <h3 className={`${styles.categoryTitle} ${righteous.className}`}>{categoryName.toUpperCase()}</h3>
             </div>
+
+            <section className={styles.desktopFilterSection}>
+                filter section
+            </section>
 
             <div className={styles.filterAndOrderProductsButtonsContainer}>
                 <button className={styles.filterAndOrderProductsButton}>
@@ -52,15 +57,17 @@ export default function ProductosPorCategoria({categoryName}: {categoryName: str
             <section className={styles.productsSection}>
                 {products.map(product => (
                     <div className={styles.productContainer} key={product.id}>
-                        <Image
-                            src={product.image}
-                            alt={`${product.name} imágen`}
-                            width={100}
-                            height={100}
-                            className={styles.productImage}
-                        />
-                        <p className={styles.productName}>{product.name}</p>
-                        <p className={styles.productPrice}>${product.discount_price}</p>
+                        <Link href={`/productos/${product.id}`}>
+                            <Image
+                                src={product.image}
+                                alt={`${product.name} imágen`}
+                                width={100}
+                                height={100}
+                                className={styles.productImage}
+                            />
+                            <p className={styles.productName}>{product.name}</p>
+                            <p className={styles.productPrice}>${product.discount_price}</p>
+                        </Link>
                     </div>
                 ))}
             </section>
