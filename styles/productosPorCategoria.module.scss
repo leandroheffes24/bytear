@@ -12,6 +12,10 @@
     color: $blueBytear;
 }
 
+.desktopFilterSection{
+    display: none;
+}
+
 .filterAndOrderProductsButtonsContainer{
     display: flex;
     justify-content: space-between;
@@ -142,6 +146,7 @@
     }
 
     .desktopFilterSection{
+        display: block;
         width: 20%;
     }
 

@@ -6,15 +6,36 @@ import axios from 'axios'
 import Image from 'next/image'
 import { righteous } from '@/app/ui/fonts'
 import Link from 'next/link'
+import MobileFilters from './components/mobileFilters'
 
 export default function ProductosPorCategoria({categoryName}: {categoryName: string}){
     const [products, setProducts] = useState<ProductAndImage[]>([])
+    const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false)
+    const [filteredProducts, setFilteredProducts] = useState<ProductAndImage[]>([])
+    const [minPrice, setMinPrice] = useState<number | undefined>(undefined)
+    const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined)
+
+    const handleFiltersClick = () => {
+        setShowMobileFilters(!showMobileFilters)
+    }
+
+    const applyPriceFilter = (min: number | undefined, max: number | undefined) => {
+        let filtered = [...products]
+        if(min !== undefined){
+            filtered = filtered.filter(product => product.discount_price >= min)
+        }
+        if(max !== undefined){
+            filtered = filtered.filter(product => product.discount_price <= max)
+        }
+        setFilteredProducts(filtered)
+    }
 
     useEffect(() => {
         async function fetchProducts(){
             try {
                 const {data} = await axios.get<{productsWithImages: ProductAndImage[]}>(`/api/categories/${categoryName}`)
                 setProducts(data.productsWithImages)
+                setFilteredProducts(data.productsWithImages)
             } catch (error) {
                 console.error("Error fetching products ", error)
             }
@@ -34,7 +55,7 @@ export default function ProductosPorCategoria({categoryName}: {categoryName: str
             </section>
 
             <div className={styles.filterAndOrderProductsButtonsContainer}>
-                <button className={styles.filterAndOrderProductsButton}>
+                <button className={styles.filterAndOrderProductsButton} onClick={handleFiltersClick}>
                     FILTRAR
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className={styles.filterAndOrderProductsIcon}>
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -54,8 +75,17 @@ export default function ProductosPorCategoria({categoryName}: {categoryName: str
                 </button>
             </div>
 
+            {showMobileFilters &&
+                <MobileFilters
+                    closeComponent={() => setShowMobileFilters(false)}
+                    applyFilter={applyPriceFilter}
+                    setMinPrice={setMinPrice}
+                    setMaxPrice={setMaxPrice}
+                />
+            }
+
             <section className={styles.productsSection}>
-                {products.map(product => (
+                {filteredProducts.map(product => (
                     <div className={styles.productContainer} key={product.id}>
                         <Link href={`/productos/${product.id}`}>
                             <Image
