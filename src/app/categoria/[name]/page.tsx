@@ -1,10 +1,13 @@
+'use client'
+
 import Footer from "@/app/components/footer/footer";
 import Header from "@/app/components/header/header";
 import ProductosPorCategoria from "@/app/components/productosPorCategoria/productosPorCategoria";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { useParams } from "next/navigation";
 
-export default function Page(params: Params){
-    const categoryName: string = params.params.name
+export default function Page(){
+    const params = useParams()
+    const categoryName: string = Array.isArray(params?.name) ? params?.name[0] : params?.name || ""
     return(
         <>
             <Header/>
