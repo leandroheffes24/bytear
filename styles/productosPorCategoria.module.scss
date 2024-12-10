@@ -10,6 +10,7 @@
 .categoryTitle{
     font-size: 1.6rem;
     color: $blueBytear;
+    text-align: center;
 }
 
 .desktopFilterSection{
@@ -150,6 +151,47 @@
         width: 20%;
     }
 
+    .desktopFiltersTitle{
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .desktopFiltersForm{
+        margin-top: 20px;
+    }
+
+    .desktopFilterTitle{
+        font-size: .9rem;
+        margin-bottom: 5px;
+        padding-left: 2px;
+        color: $secondaryTextColor;
+    }
+
+    .desktopPricesFiltersContainer{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .desktopPriceInputFilter{
+        width: 45%;
+        font-size: .8rem;
+        padding: 3px;
+    }
+
+    .desktopApplyFiltersButton{
+        margin-top: 20px;
+        background-color: $blueBytear;
+        color: $backgroundColor;
+        border-radius: 10px;
+        font-size: .9rem;
+        font-weight: bold;
+        padding: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
     .productsSection{
         width: 77%;
         row-gap: 25px;
@@ -186,7 +228,31 @@
 
     .desktopFilterSection{
         width: 20%;
-        border: 1px solid red;
+    }
+
+    .desktopFiltersTitle{
+        font-size: 1.4rem;
+    }
+
+    .desktopFiltersForm{
+        margin-top: 32px;
+    }
+
+    .desktopFilterTitle{
+        font-size: 1rem;
+        margin-bottom: 7px;
+        padding-left: 3px;
+    }
+
+    .desktopPriceInputFilter{
+        font-size: .9rem;
+        padding: 5px;
+    }
+
+    .desktopApplyFiltersButton{
+        margin-top: 40px;
+        font-size: 1rem;
+        padding: 7px 15px;
     }
 
     .productsSection{

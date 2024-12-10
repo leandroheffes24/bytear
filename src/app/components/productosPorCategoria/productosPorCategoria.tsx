@@ -30,6 +30,13 @@ export default function ProductosPorCategoria({categoryName}: {categoryName: str
         setFilteredProducts(filtered)
     }
 
+    const handleApplyFilters = (e: React.FormEvent) => {
+        e.preventDefault()
+        const min = minPrice ? parseFloat(minPrice) : undefined
+        const max = maxPrice ? parseFloat(maxPrice) : undefined
+        applyPriceFilter(min, max)
+    }
+
     useEffect(() => {
         async function fetchProducts(){
             try {
@@ -51,7 +58,30 @@ export default function ProductosPorCategoria({categoryName}: {categoryName: str
             </div>
 
             <section className={styles.desktopFilterSection}>
-                filter section
+                <p className={styles.desktopFiltersTitle}>FILTROS</p>
+                <form className={styles.desktopFiltersForm} onSubmit={handleApplyFilters}>
+                    <p className={styles.desktopFilterTitle}>Precio</p>
+                    <div className={styles.desktopPricesFiltersContainer}>
+                        <input
+                            type="number"
+                            placeholder='mínimo'
+                            className={styles.desktopPriceInputFilter}
+                            onChange={(e) => {
+                                setMinPrice(e.target.value ? parseFloat(e.target.value) : undefined)
+                            }}
+                        />
+                        -
+                        <input
+                            type="number"
+                            placeholder='máximo'
+                            className={styles.desktopPriceInputFilter}
+                            onChange={(e) => {
+                                setMaxPrice(e.target.value ? parseFloat(e.target.value) : undefined)
+                            }}
+                        />
+                    </div>
+                    <button type='submit' className={styles.desktopApplyFiltersButton}>Aplicar</button>
+                </form>
             </section>
 
             <div className={styles.filterAndOrderProductsButtonsContainer}>
