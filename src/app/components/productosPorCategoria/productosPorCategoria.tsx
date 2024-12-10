@@ -12,8 +12,8 @@ export default function ProductosPorCategoria({categoryName}: {categoryName: str
     const [products, setProducts] = useState<ProductAndImage[]>([])
     const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false)
     const [filteredProducts, setFilteredProducts] = useState<ProductAndImage[]>([])
-    const [minPrice, setMinPrice] = useState<number | undefined>(undefined)
-    const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined)
+    const [minPrice, setMinPrice] = useState<string | undefined>(undefined);
+    const [maxPrice, setMaxPrice] = useState<string | undefined>(undefined);
 
     const handleFiltersClick = () => {
         setShowMobileFilters(!showMobileFilters)
@@ -31,10 +31,10 @@ export default function ProductosPorCategoria({categoryName}: {categoryName: str
     }
 
     const handleApplyFilters = (e: React.FormEvent) => {
-        e.preventDefault()
-        const min = minPrice ? parseFloat(minPrice) : undefined
-        const max = maxPrice ? parseFloat(maxPrice) : undefined
-        applyPriceFilter(min, max)
+        e.preventDefault();
+        const min = minPrice && minPrice !== '' ? parseFloat(minPrice) : undefined;
+        const max = maxPrice && maxPrice !== '' ? parseFloat(maxPrice) : undefined;
+        applyPriceFilter(min, max);
     }
 
     useEffect(() => {
@@ -66,18 +66,16 @@ export default function ProductosPorCategoria({categoryName}: {categoryName: str
                             type="number"
                             placeholder='mínimo'
                             className={styles.desktopPriceInputFilter}
-                            onChange={(e) => {
-                                setMinPrice(e.target.value ? parseFloat(e.target.value) : undefined)
-                            }}
+                            value={minPrice || ""}
+                            onChange={(e) => setMinPrice(e.target.value)}
                         />
                         -
                         <input
                             type="number"
                             placeholder='máximo'
                             className={styles.desktopPriceInputFilter}
-                            onChange={(e) => {
-                                setMaxPrice(e.target.value ? parseFloat(e.target.value) : undefined)
-                            }}
+                            value={minPrice || ""}
+                            onChange={(e) => setMinPrice(e.target.value)}
                         />
                     </div>
                     <button type='submit' className={styles.desktopApplyFiltersButton}>Aplicar</button>
